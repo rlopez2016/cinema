@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests;
 
 
 use App\User;
 use Redirect;
 use Session;
-
 class UsuarioController extends Controller
 {
     /**
@@ -18,11 +18,15 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    
     public function index()
     {
         // return 'hola';
         // $luser=\App\User::All();  colocando el modelo:use App\User;
-         $luser=User::All();
+        // $luser=User::All();
+        $luser=User::paginate(3);
         return view('usuario.index',compact('luser'));
 
     }
@@ -44,14 +48,15 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        User::create([
+      /*  User::create([
             'name'=>$request['name'],
             'email'=>$request['email'],
             // 'password'=>bcrypt($request['password']),
             'password'=>$request['password'],  //setPasswordAttribute
-        ]);
+        ]);*/
+         User::create($request->all());
         // return 'usuario registrado';
         return redirect('/usuario')->with('message','store');
     }
@@ -86,7 +91,7 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
          $user = User::find($id); //guardamos el id del usuario en la variable user
          $user->fill($request->all());

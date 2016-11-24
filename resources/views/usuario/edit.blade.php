@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('alerts.request')
      {!!Form::model($euser,['route'=>['usuario.update',$euser],'method'=>'PUT'])!!}
 	        @include('usuario.forms.usr')
 	  <!--  <div class="form-group">

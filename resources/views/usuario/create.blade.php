@@ -16,6 +16,7 @@
 	</div>
 	<button class="btn btn-primry">Registrar</button>
 </form> -->
+@include('alerts.request')
     {!!Form::open(['route'=>'usuario.store', 'method'=>'POST'])!!}
 <!--   <div class="form-group">
 	    	{!!Form::label('nombre','Nombre:')!!}

@@ -37,6 +37,7 @@
 	</tbody>
 	@endforeach
 </table>
-
+<!-- render(); --!>
+{!!$luser->links() !!}
 
 @stop
